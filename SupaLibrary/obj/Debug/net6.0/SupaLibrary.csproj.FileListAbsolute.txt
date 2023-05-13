@@ -1,0 +1,14 @@
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\bin\Debug\net6.0\SupaLibrary.deps.json
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\bin\Debug\net6.0\SupaLibrary.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\bin\Debug\net6.0\SupaLibrary.pdb
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\SupaLibrary.csproj.AssemblyReference.cache
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\SupaLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\SupaLibrary.AssemblyInfoInputs.cache
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\SupaLibrary.AssemblyInfo.cs
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\SupaLibrary.csproj.CoreCompileInputs.cache
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\SupaLibrary.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\refint\SupaLibrary.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\SupaLibrary.pdb
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\ref\SupaLibrary.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\bin\Debug\net6.0\SupaLibrary.runtimeconfig.json
+C:\Users\lawza\source\repos\NorthBankingSystem\SupaLibrary\obj\Debug\net6.0\SupaLibrary.genruntimeconfig.cache
