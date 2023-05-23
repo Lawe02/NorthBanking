@@ -1,0 +1,98 @@
+﻿@page
+@model WebbApp.Pages.Customers.IndexModel
+@{
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+                Id
+                <a asp-page="/Customers/Index"
+                   asp-route-sortColumn="Id"
+                   asp-route-sortOrder="asc"
+                   style="text-decoration:none">
+                    <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                </a>
+                <a asp-page="/Customers/Index"
+                   asp-route-sortColumn="Id"
+                   asp-route-sortOrder="desc"
+                   style="text-decoration:none">
+                    <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                </a>
+            </th>
+            <th scope="col">
+                Name
+                <a asp-page="/Customers/Index"
+                   asp-route-sortColumn="Name"
+                   asp-route-sortOrder="asc"
+                   style="text-decoration:none">
+                    <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                </a>
+                <a asp-page="/Customers/Index"
+                   asp-route-sortColumn="Name"
+                   asp-route-sortOrder="desc"
+                   style="text-decoration:none">
+                    <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                </a>
+            </th>
+            <th scope="col">
+                Address
+                <a asp-page="/Customers/Index"
+                   asp-route-sortColumn="Address"
+                   asp-route-sortOrder="asc"
+                   style="text-decoration:none">
+                    <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                </a>
+                <a asp-page="/Customers/Index"
+                   asp-route-sortColumn="Address"
+                   asp-route-sortOrder="desc"
+                   style="text-decoration:none">
+                    <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var customer in Model.Customers)
+            {
+                <tr>
+                    <td>@customer.CustomerId</td>
+                    <td>@customer.Givenname</td> 
+                    <td>@customer.Streetaddress</td>
+                    <td>
+                        <a asp-page="/Customers/OneCustomer"
+                   asp-route-id="@customer.CustomerId">
+                            i
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+    <form method="get">
+        <input asp-for="@Model.Q" class="page-input" />
+        <input type="submit" value="Search" class="pagebtn" style="position:relative;" />
+    </form>
+    <tr>
+        <a class="pagebtn"
+           asp-page="/Customers/Index"
+           asp-route-pageNr=@(Model.PageNr-1)
+           asp-route-sortColumn=@(Model.SortColumn)
+           asp-route-sortOrder=@(Model.SortOrder)
+           asp-route-q=@(Model.Q)
+           style="float:left;">
+            Prev
+        </a>
+        <a class="pagebtn"
+           asp-page="/Customers/Index"
+           asp-route-pageNr=@(Model.PageNr+1)
+           asp-route-sortColumn=@(Model.SortColumn)
+           asp-route-sortOrder=@(Model.SortOrder)
+           asp-route-q=@(Model.Q)
+           style="float:right;">
+            Next
+        </a>
+    </tr>
+</table>

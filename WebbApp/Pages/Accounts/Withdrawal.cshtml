@@ -1,0 +1,22 @@
+﻿@page
+@model WebbApp.Pages.Accounts.WithdrawalModel
+@{
+}
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <h4>Account Id: @Model.Id</h4>
+    <h4>Balance: @Model.Balance</h4>
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Amount">Amount:</label>
+            <input class="form-control" asp-for="Amount" style="width: 300px;" />
+            <span class="field-validation-error bg-white" asp-validation-for="Amount" style="color:red;"></span>
+        </div>
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        @* Using ASP.NET attribute syntax *@
+        <button type="submit" class="btn btn-primary" asp-controller="Account" asp-action="Withdraw">Withdraw</button>
+    </form>
+
+</div>

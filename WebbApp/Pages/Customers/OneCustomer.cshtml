@@ -1,0 +1,56 @@
+﻿@page
+@model WebbApp.Pages.Customers.OneCustomerModel
+@{
+    <div style="border: 1px solid #ccc; border-radius: 5px; background-color: transparent; padding: 10px; width: 1000px; margin: auto;">
+        <div style="overflow: hidden;">
+            <div style="float: right; width: 15%; text-align: left;">
+                <p>Name: @Model.CustomerVm.Givenname</p>
+                <p>Nationality: @Model.CustomerVm.Country</p>
+                <p>City: @Model.CustomerVm.City</p>
+                <p>Postal Code: @Model.CustomerVm.Zipcode</p>
+            </div> 
+            <div style="float: right; width: 35%; text-align: left;">
+                <p>Email: @Model.CustomerVm.Emailaddress</p>
+                <p>Address: @Model.CustomerVm.Streetaddress</p>
+                <p>National Id: @Model.CustomerVm.NationalId</p>
+                <p>Phonenumber: @Model.CustomerVm.Telephonenumber</p>
+            </div>
+            <div style="text-align: center; width: 50%;">
+                <h2>@Model.CustomerVm.Givenname</h2>
+                <table style="margin: 0 auto;">
+                Accounts
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Balance</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var acc in @Model.Accounts)
+                        {
+                            <tr>
+                                <th>@acc.AccountId</th>
+                                <th>@acc.Balance</th>
+                                <th>
+                                    <a asp-page="/Accounts/Deposit" asp-route-id="@Model.CustomerVm.CustomerId"><i class="fa-solid fa-square-plus"></i></a>
+                                </th>
+                                <th>
+                                    <a asp-page="/Accounts/Transfer" asp-route-id="@Model.CustomerVm.CustomerId"><i class="fa-solid fa-money-bill-transfer"></i></a>
+                                </th>
+                                <th>
+                                    <a asp-page="/Accounts/Withdrawal" asp-route-id="@Model.CustomerVm.CustomerId"><i class="fa-solid fa-square-minus"></i></a>
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+}

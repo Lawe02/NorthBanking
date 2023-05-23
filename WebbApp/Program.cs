@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SupaLibrary.InfraStructure;
+using SupaLibrary.Services;
+using System.Reflection;
 using WebbApp.Data;
+using WebbApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +19,17 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
+AutoMapperConfig.Configure(builder.Services);
+
 builder.Services.AddTransient<DataInitializer>();
+
+builder.Services.AddTransient<ICustomerService, CustomerService>();
+builder.Services.AddTransient<IAccountService, AccountService>();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+builder.Services.AddDbContext<BankAppDataContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("BankConnection")));
 
 var app = builder.Build();
 

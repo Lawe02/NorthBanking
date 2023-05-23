@@ -1,0 +1,113 @@
+﻿@page
+@model WebbApp.Pages.Accounts.IndexModel
+@{
+}
+<link rel="stylesheet" href="~/lib/fontawesome-free/css/all.min.css" />
+
+<div style="margin-bottom:50px">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Id
+                    <a asp-page="/Accounts/Index"
+                       asp-route-sortColumn="Id"
+                       asp-route-sortOrder="asc"
+                       style="text-decoration:none">
+                        <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                    </a>
+                    <a asp-page="/Accounts/Index"
+                       asp-route-sortColumn="Id"
+                       asp-route-sortOrder="desc"
+                       style="text-decoration:none">
+                        <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                    </a>
+                </th>
+                <th scope="col">
+                    Frequency
+                    <a asp-page="/Accounts/Index"
+                       asp-route-sortColumn="Frequency"
+                       asp-route-sortOrder="asc"
+                       style="text-decoration:none">
+                        <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                    </a>
+                    <a asp-page="/Accounts/Index"
+                       asp-route-sortColumn="Frequency"
+                       asp-route-sortOrder="desc"
+                       style="text-decoration:none">
+                        <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                    </a>
+                </th>
+                <th scope="col">
+                    Created
+                    <a asp-page="/Accounts/Index"
+                       asp-route-sortColumn="Created"
+                       asp-route-sortOrder="asc"
+                       style="text-decoration:none">
+                        <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                    </a>
+                    <a asp-page="/Accounts/Index"
+                       asp-route-sortColumn="Created"
+                       asp-route-sortOrder="desc"
+                       style="text-decoration:none">
+                        <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                    </a>
+                </th>
+                <th scope="col">
+                    Balance
+                    <a asp-page="/Accounts/Index"
+                       asp-route-sortColumn="Balance"
+                       asp-route-sortOrder="asc"
+                       style="text-decoration:none">
+                        <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                    </a>
+                    <a asp-page="/Accounts/Index"
+                       asp-route-sortColumn="Balance"
+                       asp-route-sortOrder="desc"
+                       style="text-decoration:none">
+                        <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                    </a>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var account in Model.Accounts)
+                {
+                    <tr>
+                        <th>@account.Id</th>
+                        <th>@account.Frequency</th>
+                        <th>@account.Created</th>
+                        <th>@account.Balance</th>
+                    </tr>
+                }
+            }
+
+        </tbody>
+        <form method="get">
+            <input asp-for="@Model.Q" class="page-input" />
+            <input type="submit" value="Search" class="pagebtn" style="position:relative;" />
+        </form>
+    </table>
+    <tr>
+        <a class="pagebtn"
+           asp-page="/Accounts/Index"
+           asp-route-pageNr=@(Model.PageNr-1)
+           asp-route-sortColumn=@(Model.SortColumn)
+           asp-route-sortOrder=@(Model.SortOrder)
+           asp-route-q=@(Model.Q)
+           style="float:left;">
+            Prev
+        </a>
+        <a class="pagebtn"
+           asp-page="/Accounts/Index"
+           asp-route-pageNr=@(Model.PageNr+1)
+           asp-route-sortColumn=@(Model.SortColumn)
+           asp-route-sortOrder=@(Model.SortOrder)
+           asp-route-q=@(Model.Q)
+           style="float:right;">
+            Next
+        </a>
+    </tr>
+</div>

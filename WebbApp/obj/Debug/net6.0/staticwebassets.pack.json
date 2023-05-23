@@ -13,6 +13,26 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\lawza\\source\\repos\\NorthBankingSystem\\WebbApp\\wwwroot\\img\\bg.jpg",
+      "PackagePath": "staticwebassets\\img\\bg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\lawza\\source\\repos\\NorthBankingSystem\\WebbApp\\wwwroot\\img\\dnmrk.png",
+      "PackagePath": "staticwebassets\\img\\dnmrk.png"
+    },
+    {
+      "Id": "C:\\Users\\lawza\\source\\repos\\NorthBankingSystem\\WebbApp\\wwwroot\\img\\norge.png",
+      "PackagePath": "staticwebassets\\img\\norge.png"
+    },
+    {
+      "Id": "C:\\Users\\lawza\\source\\repos\\NorthBankingSystem\\WebbApp\\wwwroot\\img\\spumi.png",
+      "PackagePath": "staticwebassets\\img\\spumi.png"
+    },
+    {
+      "Id": "C:\\Users\\lawza\\source\\repos\\NorthBankingSystem\\WebbApp\\wwwroot\\img\\sweden.png",
+      "PackagePath": "staticwebassets\\img\\sweden.png"
+    },
+    {
       "Id": "C:\\Users\\lawza\\source\\repos\\NorthBankingSystem\\WebbApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
