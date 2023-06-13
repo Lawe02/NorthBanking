@@ -6,7 +6,8 @@ using SupaLibrary.ViewModels;
 
 namespace WebbApp.Pages.Customers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Cashier")]
+
     public class IndexModel : PageModel
     {
         private readonly ICustomerService _cusService;

@@ -1,13 +1,13 @@
-﻿using SupaLibrary.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
+using SupaLibrary.ViewModels;
+using System.Data;
 using WebbApp.Models;
+
 
 namespace SupaLibrary.Services
 {
+    [Authorize(Roles = "Cashier")]
+
     public class AccountService : IAccountService
     {
         private readonly BankAppDataContext _context;
@@ -109,6 +109,16 @@ namespace SupaLibrary.Services
         {
             MakeDeposit(amount, to);
             MakeWithdrawal(amount, from);
+        }
+
+        public List<Transaction> GetTransactions(int id, int page)
+        {
+            var transaction = _context.Transactions.Where(x => x.AccountId == id)
+                                                   .OrderByDescending(x => x.Date)     
+                                                   .Skip((page-1) * 20)
+                                                   .Take(20)
+                                                   .ToList();
+            return transaction;
         }
     }
 }

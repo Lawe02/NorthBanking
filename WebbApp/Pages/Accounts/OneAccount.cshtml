@@ -1,4 +1,85 @@
 ﻿@page
 @model WebbApp.Pages.Accounts.OneAccountModel
 @{
+    ViewData["Title"] = "Account Details";
 }
+
+<h1>Account Details</h1>
+
+<div>
+    <h2>Account Information</h2>
+    <p><strong>Account ID:</strong> @Model.Account.AccountId</p>
+    <p><strong>Frequency:</strong> @Model.Account.Frequency</p>
+    <p><strong>Created:</strong> @Model.Account.Created</p>
+    <p><strong>Balance:</strong> @Model.Account.Balance</p>
+</div>
+
+<div>
+    <h2>Transactions</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>@transaction.TransactionId</td>
+                    <td>@transaction.Date</td>
+                    <td>@transaction.Amount</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+        <button id="showMoreButton" type="submit" asp-for=PageNr vale=PageNr++ >Show More</button>
+
+</div>
+
+
+    <script>
+    var anka = 1;
+        document.getElementById("showMoreButton").addEventListener("click", function () {
+            var id = @Model.Account.AccountId;
+     
+
+        var url = `/Accounts/OneAccount?handler=ShowMore&id=${id}&pageNr=${anka}`;
+        anka++;
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error: ' + response.status);
+                }
+            })
+            .then(data => {
+                // Access the transactions array from the response object
+                const transactions = data.transactions;
+
+                // Iterate over the transactions array
+                transactions.forEach(transaction => {
+                    var row = document.createElement("tr");
+                                row.innerHTML = `
+                                    <td>${transaction.transactionId}</td>
+                                    <td>${transaction.date}</td>
+                                    <td>${transaction.amount}</td>
+
+                                `;
+                                document.querySelector("tbody").appendChild(row);
+                    console.log(transaction);
+                });
+
+            })
+            .catch(error => {
+                // Handle any errors during the request or data processing
+                console.error(error);
+            });
+        });
+    </script>
+    

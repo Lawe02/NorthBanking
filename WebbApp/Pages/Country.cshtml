@@ -1,0 +1,26 @@
+﻿@page
+@model WebbApp.Pages.Shared.CountryModel
+<a asp-page="Index"><button class="btn-dark">Back</button></a>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Account ID</th>
+            <th> Name</th>
+            <th>Balance</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>@customer.Id</td>
+                <td>@customer.Name</td>
+                <td>@customer.Balance</td>
+                <td>@customer.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

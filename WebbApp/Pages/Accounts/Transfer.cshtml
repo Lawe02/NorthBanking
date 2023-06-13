@@ -10,14 +10,16 @@
     <form method="post">
         <div class="form-group">
             <label for="amount">Amount:</label>
-            <input type="number" class="form-control" id="amount" name="amount" min="0" step="0.01" required>
+            <input class="form-control" asp-for="Amount">
+            <span class="field-validation-error" asp-validation-for="Amount"></span>
         </div>
         <div class="form-group">
             <label for="amount">To Account:</label>
-            <input type="number" class="form-control" id="idTo" name="idTo" required>
+            <input class="form-control" asp-for="AccountTo" name="idTo" value="">
+            <span class="field-validation-error" asp-validation-for="AccountTo"></span>
         </div>
-        <input type="hidden" name="id" value="@Model.Id" />
-
+        <input asp-for="Id" type="hidden" name="id" value="@Model.Id" />
+        <input asp-for="Balance" type="hidden" name="balance" value="@Model.Balance" /> 
         @* Using ASP.NET attribute syntax *@
         <button type="submit" class="btn btn-primary" asp-controller="Account" asp-action="Transfer">Transfer</button>
     </form>

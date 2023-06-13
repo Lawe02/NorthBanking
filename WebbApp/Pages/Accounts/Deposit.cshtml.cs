@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebbApp.Pages.Accounts
 {
-    [Authorize(Roles="Admin")]
-    
+    [Authorize(Roles = "Cashier")] 
+
     public class DepositModel : PageModel
     {
         private readonly IAccountService _service;

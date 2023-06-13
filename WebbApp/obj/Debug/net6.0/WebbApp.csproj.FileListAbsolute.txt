@@ -283,3 +283,9 @@ C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\runtimes
 C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\lawza\source\repos\NorthBankingSystem\WebbApp\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebbApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" defer />
     <link rel="stylesheet" href="~/WebbApp.styles.css" asp-append-version="true" />
 
     <script src="https://kit.fontawesome.com/41c8b474e2.js" crossorigin="anonymous"></script>
@@ -30,6 +30,10 @@
                                 <a class="nav-link text-dark" asp-area="Identity"
                                asp-page="/Account/Register">Register</a>
                             </li>
+                        }
+                        @if(User.IsInRole("Cashier"))
+                        {
+                            
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-page="/Customers/Index">Customers</a>
                             </li>

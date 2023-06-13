@@ -13,7 +13,8 @@
             <input class="form-control" asp-for="Amount" style="width: 300px;" />
             <span class="field-validation-error bg-white" asp-validation-for="Amount" style="color:red;"></span>
         </div>
-        <input type="hidden" name="id" value="@Model.Id" />
+        <input asp-for="Id" type="hidden" name="id" value="@Model.Id" />
+        <input asp-for="Balance" type="hidden" value="@Model.Balance"/>
 
         @* Using ASP.NET attribute syntax *@
         <button type="submit" class="btn btn-primary" asp-controller="Account" asp-action="Withdraw">Withdraw</button>

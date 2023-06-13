@@ -9,18 +9,48 @@
 
         <h1>Skandinaviska Sparbanken</h1>
         <h2>We're working hard to improve our website and we'll ready to launch after</h2>
-        <div class="countdown d-flex justify-content-center" data-count="2023/12/3">
-            <div>
+        <div class="countdown d-flex justify-content-center">
+            <div asp-page="/Country" asp-route-id="SE">
+                <a asp-page="/Country" asp-route-id="SE">
                 <img src="~/img/sweden.PNG" />
+                </a>
             </div>
             <div>
+                <a asp-page="/Country" asp-route-id="NO">
                 <img src="~/img/norge.PNG" />
+                </a>
             </div>
             <div>
+                <a asp-page="/Country" asp-route-id="FI">
                 <img src="~/img/spumi.PNG" />
+                </a>
             </div>
             <div>
+                <a asp-page="/Country" asp-route-id="DK">
                 <img src="~/img/dnmrk.PNG" />
+                </a>
+            </div>
+        </div>
+        <div class="countdown d-flex justify-content-center" style="margin-top:-52px;">
+            <div style="height: 300px;">
+                <p><b>Accounts: @Model.TotalAccounts[0]</b></p>
+                <p><b>Clients: @Model.TotalClients[0]</b></p>
+                <p><b>Total Assets: @Model.TotalAssets[0]</b></p>
+            </div>
+            <div style="height: 300px;">
+                <p><b>Accounts: @Model.TotalAccounts[1]</b></p>
+                <p><b>Clients: @Model.TotalClients[1]</b></p>
+                <p><b>Total Assets: @Model.TotalAssets[1]</b></p>
+            </div>
+            <div style="height: 300px;">
+                <p><b>Accounts: @Model.TotalAccounts[2]</b></p>
+                <p><b>Clients: @Model.TotalClients[2]</b></p>
+                <p><b>Total Assets: @Model.TotalAssets[2]</b></p>
+            </div>
+            <div style="height: 300px;">
+                <p><b>Accounts: @Model.TotalAccounts[3]</b></p>
+                <p><b>Clients: @Model.TotalClients[3]</b></p> 
+                <p><b>Total Assets: @Model.TotalAssets[3]</b></p>
             </div>
         </div>
 

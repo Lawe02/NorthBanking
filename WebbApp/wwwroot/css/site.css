@@ -783,9 +783,17 @@ section {
         padding: 10px 12px;
     }
 
+button[type=submit] {
+        background: #24b7a4;
+        border: 0;
+        padding: 10px 24px;
+        color: #fff;
+        transition: 0.4s;
+        border-radius: 50px;
+    }
 
 
-    .contact .php-email-form button[type=submit]:hover {
+    button[type=submit]:hover {
         background: #36d8c3;
     }
 
@@ -824,3 +832,10 @@ section {
         #footer .credits a {
             color: #36d8c3;
         }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
