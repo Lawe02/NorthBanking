@@ -38,7 +38,7 @@ namespace WebbApp.Pages.Accounts
             {
                 var acc = _service.GetAccount(id);
                 _service.MakeDeposit(amount, acc);
-                return RedirectToPage("Index", new { id });
+                return RedirectToPage("../Customers/OneCustomer", new { id });
             }
             else 
             {

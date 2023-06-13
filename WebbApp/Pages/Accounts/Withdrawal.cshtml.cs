@@ -45,7 +45,7 @@ namespace WebbApp.Pages.Accounts
             {
                 var acc = _service.GetAccount(id);
                 _service.MakeWithdrawal(Amount, acc);
-                return RedirectToPage("Index", new { id });
+                return RedirectToPage("../Customers/OneCustomer", new { id });
             }
             else
             {

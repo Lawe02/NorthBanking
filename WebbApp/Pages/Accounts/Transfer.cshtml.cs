@@ -55,7 +55,7 @@ namespace WebbApp.Pages.Accounts
                 var to = _service.GetAccount(idTo);
                 var from = _service.GetAccount(id);
                 _service.MakeTransfer(amount, from, to);
-                return RedirectToPage("Index", new { id });
+                return RedirectToPage("../Customers/OneCustomer", new { id });
             }
             else
                 return Page();
