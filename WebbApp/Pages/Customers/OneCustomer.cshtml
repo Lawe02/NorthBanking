@@ -26,6 +26,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,18 +36,22 @@
                                 <th>@acc.AccountId</th>
                                 <th>@acc.Balance</th>
                                 <th>
-                                    <a asp-page="/Accounts/Deposit" asp-route-id="@Model.CustomerVm.CustomerId"><i class="fa-solid fa-square-plus"></i></a>
+                                    <a asp-page="/Accounts/OneAccount" asp-route-id=@acc.AccountId><i class="fa-regular fa-square-info"></i></a>
                                 </th>
                                 <th>
-                                    <a asp-page="/Accounts/Transfer" asp-route-id="@Model.CustomerVm.CustomerId"><i class="fa-solid fa-money-bill-transfer"></i></a>
+                                    <a asp-page="/Accounts/Deposit" asp-route-id=@acc.AccountId><i class="fa-solid fa-square-plus"></i></a>
                                 </th>
                                 <th>
-                                    <a asp-page="/Accounts/Withdrawal" asp-route-id="@Model.CustomerVm.CustomerId"><i class="fa-solid fa-square-minus"></i></a>
+                                    <a asp-page="/Accounts/Transfer" asp-route-id=@acc.AccountId><i class="fa-solid fa-money-bill-transfer"></i></a>
+                                </th>
+                                <th>
+                                    <a asp-page="/Accounts/Withdrawal" asp-route-id=@acc.AccountId><i class="fa-solid fa-square-minus"></i></a>
                                 </th>
                             </tr>
                         }
                     </tbody>
                 </table>
+                <p style="margin: 30px; cursor: pointer; background-color: transparent;"><b>Total Assets: @Model.TotalBalance kr</b></p>
             </div>
             <button onclick="goBack()" type="submit">Go Back</button>
         </div>

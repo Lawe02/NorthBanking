@@ -3,6 +3,7 @@ using SupaLibrary.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using WebbApp.Models;
@@ -63,6 +64,14 @@ namespace SupaLibrary.Services
         {
             var accounts = _dbContext.Accounts.Include(x => x.Dispositions).Where(x => x.AccountId == id).ToList();
             return accounts;
+        }
+
+        public decimal TotalBalance(int id)
+        {
+            decimal totalBalance = GetCustomerAccounts(id)
+                                  .Sum(x => x.Balance);
+
+            return totalBalance;
         }
     }
 }

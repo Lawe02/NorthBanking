@@ -14,5 +14,6 @@ namespace SupaLibrary.Services
         public List<CustomerViewModel> GetCustomers(string sortColumn, string sortOrder, string q, int pageNr);
         public List<Account> GetCustomerAccounts(int id);
         public Customer GetCustomer(int id);
+        public decimal TotalBalance(int id);
     }
 }

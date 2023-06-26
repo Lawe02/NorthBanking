@@ -28,11 +28,13 @@ namespace WebbApp.Pages.Customers
         public CustomerViewModel CustomerVm { get; set; } 
         public Customer C { get; set; }
         public List<Account> Accounts { get; set; }
+        public decimal TotalBalance { get; set; }
         public void OnGet(int id)
         {
             C = _cusService.GetCustomer(id);
             CustomerVm = _mapper.Map(C, CustomerVm);
             Accounts = _cusService.GetCustomerAccounts(id);
+            TotalBalance = _cusService.TotalBalance(id);
         }
     }
 }
