@@ -16,29 +16,32 @@ namespace WebbApp.Pages.Accounts
             _service = service;
         }
         [BindProperty]
-        [Required]
-        public int Id { get; set; }
+        public int AccountId { get; set; }
+        [BindProperty]
+        public int CustomerId { get; set; }
 
         [BindProperty]
         [Required]
         [Range(100, 50000)]
         public decimal Amount { get; set; }
+        [BindProperty]
         public decimal Balance { get; set; }
-        public void OnGet(int id)
+        public void OnGet(int id, int cusId)
         {
             var acc = _service.GetAccount(id);
 
-            Id = acc.AccountId;
+            CustomerId = cusId;
+            AccountId = id;
             Balance = acc.Balance;
         }
 
-        public IActionResult OnPost(int id, decimal amount)
+        public IActionResult OnPost()
         {
             if(ModelState.IsValid)
             {
-                var acc = _service.GetAccount(id);
-                _service.MakeDeposit(amount, acc);
-                return RedirectToPage("../Customers/OneCustomer", new { id });
+                var acc = _service.GetAccount(AccountId);
+                _service.MakeDeposit(Amount, acc);
+                return RedirectToPage("../Customers/OneCustomer", new { id = CustomerId });
             }
             else 
             {
@@ -47,3 +50,4 @@ namespace WebbApp.Pages.Accounts
         }
     }
 }
+

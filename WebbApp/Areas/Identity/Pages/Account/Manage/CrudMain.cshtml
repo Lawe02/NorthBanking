@@ -1,0 +1,106 @@
+﻿@page
+@model WebbApp.Areas.Identity.Pages.Account.Manage.CrudMainModel
+@{
+    <table class="user-list">
+        <thead>
+            <tr>
+                <th class="header-cell">Name</th>
+                <th class="header-cell">Email</th>
+                <th class="header-cell">Confirmed</th>
+                <th class="header-cell">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr class="user-item">
+                    <td class="user-name">@user.UserName</td>
+                    <td class="user-email"> @user.Email</td>
+                    <td class="user-confirmed-@user.EmailConfirmed">@user.EmailConfirmed</td>
+                    <td class="user-actions">
+                        <form method="get" asp-page="./UpdateUser">
+                            <input type="hidden" name="id" value="@user.Id"/>
+                            <button type="submit" class="update-btn">Update</button>
+                        </form>
+                        <form method="post" asp-page-handler="Delete">
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<style>
+    .user-list {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: rgba(232, 240, 247, 0.9);
+        color: #333;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden; /* Ensure the rounded corners are visible */
+    }
+
+    .header-cell {
+        padding: 16px;
+        background-color: #24b7a4;
+        color: #fff;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .user-list thead th:first-child {
+        border-top-left-radius: 8px;
+    }
+
+    .user-list thead th:last-child {
+        border-top-right-radius: 8px;
+    }
+
+    .user-item {
+        background-color: rgba(213, 225, 235, 0.9);
+    }
+
+        .user-item:nth-child(even) {
+            background-color: rgba(213, 225, 235, 0.7);
+        }
+
+        .user-item:hover {
+            background-color: rgba(213, 225, 235, 1);
+            transition: background-color 0.3s ease;
+        }
+
+        .user-item td {
+            padding: 16px;
+            border-bottom: 1px solid #ccc;
+        }
+
+    .user-actions {
+        display: flex;
+        align-items: center;
+    }
+
+        .user-actions button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-right: 8px;
+            color: #fff;
+            transition: 0.4s;
+        }
+
+        .user-actions .update-btn {
+            background-color: #24b7a4;
+        }
+
+        .user-actions .delete-btn {
+            background-color: #e74c3c;
+        }
+
+        .user-actions button:hover {
+            opacity: 0.8;
+        }
+</style>

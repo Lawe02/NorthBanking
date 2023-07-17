@@ -15,7 +15,6 @@ namespace WebbApp.Models
         public string? Symbol { get; set; }
         public string? Bank { get; set; }
         public string? Account { get; set; }
-
         public virtual Account AccountNavigation { get; set; } = null!;
     }
 }

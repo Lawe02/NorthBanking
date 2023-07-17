@@ -62,7 +62,19 @@ namespace SupaLibrary.Services
         }
         public List<Account> GetCustomerAccounts(int id)
         {
-            var accounts = _dbContext.Accounts.Include(x => x.Dispositions).Where(x => x.AccountId == id).ToList();
+            var accounts = _dbContext.Dispositions.Include(x => x.Customer)
+                                                     .Include(x => x.Account)
+                                                     .Where(x => x.CustomerId == id)
+                                                     .Select(x => new Account 
+                                                     {
+                                                         AccountId = x.Account.AccountId,
+                                                         Frequency = x.Account.Frequency,
+                                                         Balance = x.Account.Balance,
+                                                         Created = x.Account.Created, 
+                                                         Dispositions = x.Account.Dispositions, Loans = x.Account.Loans
+                                                     })
+                                                     .ToList();
+
             return accounts;
         }
 

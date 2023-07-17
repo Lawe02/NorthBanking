@@ -36,16 +36,16 @@
                                 <th>@acc.AccountId</th>
                                 <th>@acc.Balance</th>
                                 <th>
-                                    <a asp-page="/Accounts/OneAccount" asp-route-id=@acc.AccountId><i class="fa-regular fa-square-info"></i></a>
+                                    <a asp-page="/Accounts/OneAccount" asp-route-id=@acc.AccountId asp-route-cusId=@Model.CustomerVm.CustomerId><i class="fa-regular fa-square-info"></i></a>
                                 </th>
                                 <th>
-                                    <a asp-page="/Accounts/Deposit" asp-route-id=@acc.AccountId><i class="fa-solid fa-square-plus"></i></a>
+                                    <a asp-page="/Accounts/Deposit" asp-route-id=@acc.AccountId asp-route-cusId=@Model.CustomerVm.CustomerId><i class="fa-solid fa-square-plus"></i></a>
                                 </th>
                                 <th>
-                                    <a asp-page="/Accounts/Transfer" asp-route-id=@acc.AccountId><i class="fa-solid fa-money-bill-transfer"></i></a>
+                                    <a asp-page="/Accounts/Transfer" asp-route-id=@acc.AccountId asp-route-cusId=@Model.CustomerVm.CustomerId><i class="fa-solid fa-money-bill-transfer"></i></a>
                                 </th>
                                 <th>
-                                    <a asp-page="/Accounts/Withdrawal" asp-route-id=@acc.AccountId><i class="fa-solid fa-square-minus"></i></a>
+                                    <a asp-page="/Accounts/Withdrawal" asp-route-id=@acc.AccountId asp-route-cusId=@Model.CustomerVm.CustomerId><i class="fa-solid fa-square-minus"></i></a>
                                 </th>
                             </tr>
                         }

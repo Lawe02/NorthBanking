@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SupaLibrary.Services;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using WebbApp.Models;
 
 namespace WebbApp.Pages.Accounts
 {
@@ -18,6 +19,8 @@ namespace WebbApp.Pages.Accounts
             _service = service;
         }
         [BindProperty]
+        public int CustomerId { get; set; }
+        [BindProperty]
         public int Id { get; set; }
         [BindProperty]
         public decimal Balance { get; set; }
@@ -26,15 +29,15 @@ namespace WebbApp.Pages.Accounts
         [Range(100, 50000)]
         [Required]
         public decimal Amount { get; set; }
-        public void OnGet(int id)
+        public void OnGet(int id, int cusId)
         {
             var acc = _service.GetAccount(id);
-
+            CustomerId = cusId;
             Id = acc.AccountId;
             Balance = acc.Balance;
         }
-
-        public IActionResult OnPost(int id)
+           
+        public IActionResult OnPost()
         {
             if(Balance < Amount)
             {
@@ -43,14 +46,12 @@ namespace WebbApp.Pages.Accounts
             }
             if(ModelState.IsValid)
             {
-                var acc = _service.GetAccount(id);
+                var acc = _service.GetAccount(Id);
                 _service.MakeWithdrawal(Amount, acc);
-                return RedirectToPage("../Customers/OneCustomer", new { id });
+                return RedirectToPage("../Customers/OneCustomer", new { id = CustomerId });
             }
             else
-            {
                 return Page();
-            }
         }
     }
 }

@@ -9,18 +9,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebbApp.Data;
 
 namespace WebbApp.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<IdentityUser> _signInManager; 
+        private readonly ApplicationDbContext _dbContext;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            ApplicationDbContext dbContext)
         {
+            _dbContext = dbContext;
             _userManager = userManager;
             _signInManager = signInManager;
         }

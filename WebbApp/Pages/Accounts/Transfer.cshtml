@@ -19,6 +19,7 @@
             <span class="field-validation-error" asp-validation-for="AccountTo"></span>
         </div>
         <input asp-for="Id" type="hidden" name="id" value="@Model.Id" />
+        <input asp-for="CustomerId" type="hidden" name="cusId" value="@Model.CustomerId" />
         <input asp-for="Balance" type="hidden" name="balance" value="@Model.Balance" /> 
         @* Using ASP.NET attribute syntax *@
         <button type="submit" class="btn btn-primary" asp-controller="Account" asp-action="Transfer">Transfer</button>

@@ -1,21 +1,24 @@
 ﻿@page
 @model WebbApp.Pages.Accounts.DepositModel
 @{
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+        <h4>Account Id: @Model.AccountId</h4>
+        <h4>Balance: @Model.Balance</h4>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Amount">Amount:</label>
+                <input class="form-control" asp-for="Amount" />
+                <span class="field-validation-error bg-white" style="color: red; font-size: 13px;" asp-validation-for="Amount"></span>
+            </div>
+
+            <input asp-for="@Model.CustomerId" type="hidden" value="@Model.CustomerId" />
+            <input asp-for="@Model.AccountId" type="hidden" value="@Model.AccountId" />
+            <input asp-for="@Model.Balance" type="hidden" value="@Model.Balance" />
+
+            <button type="submit" class="btn btn-primary" asp-controller="Account" asp-action="Deposit">Deposit</button>
+        </form>
+        <button onclick="goBack()" type="submit">Go Back</button>
+    </div>
 }
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-    <h4>Account Id: @Model.Id</h4>
-    <h4>Balance: @Model.Balance</h4>
-
-    <form method="post">
-        <div class="form-group">
-            <label for="Balance">Amount:</label>
-            <input class="form-control" asp-for="Amount"/>
-            <span class="field-validation-error bg-white" style="color: red; font-size: 13px;" asp-validation-for="Amount"></span>
-        </div>
-        <input asp-for="Id" type="hidden" name="id" value="@Model.Id" />
-
-        <button type="submit" class="btn btn-primary" asp-controller="Account" asp-action="Deposit">Deposit</button>
-    </form>
-    <button onclick="goBack()" type="submit">Go Back</button>
-</div>

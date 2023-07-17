@@ -27,4 +27,8 @@
     <ProjectReference Include="..\SupaLibrary\SupaLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\CustomerManagment\" />
+  </ItemGroup>
+
 </Project>

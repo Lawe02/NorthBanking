@@ -26,6 +26,7 @@ builder.Services.AddTransient<DataInitializer>();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<ICountryService, CountryService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
