@@ -11,12 +11,14 @@
                 <a asp-page="/Customers/Index"
                    asp-route-sortColumn="Id"
                    asp-route-sortOrder="asc"
+                   asp-route-q=@(Model.Q)
                    style="text-decoration:none">
                     <i class="fa-solid fa-arrow-up" style="color:black"></i>
                 </a>
                 <a asp-page="/Customers/Index"
                    asp-route-sortColumn="Id"
                    asp-route-sortOrder="desc"
+                   asp-route-q=@(Model.Q)
                    style="text-decoration:none">
                     <i class="fa-solid fa-arrow-down" style="color:black"></i>
                 </a>
@@ -26,12 +28,14 @@
                 <a asp-page="/Customers/Index"
                    asp-route-sortColumn="Name"
                    asp-route-sortOrder="asc"
+                   asp-route-q=@(Model.Q)
                    style="text-decoration:none">
                     <i class="fa-solid fa-arrow-up" style="color:black"></i>
                 </a>
                 <a asp-page="/Customers/Index"
                    asp-route-sortColumn="Name"
                    asp-route-sortOrder="desc"
+                   asp-route-q=@(Model.Q)
                    style="text-decoration:none">
                     <i class="fa-solid fa-arrow-down" style="color:black"></i>
                 </a>
@@ -41,12 +45,14 @@
                 <a asp-page="/Customers/Index"
                    asp-route-sortColumn="Address"
                    asp-route-sortOrder="asc"
+                   asp-route-q=@(Model.Q)
                    style="text-decoration:none">
                     <i class="fa-solid fa-arrow-up" style="color:black"></i>
                 </a>
                 <a asp-page="/Customers/Index"
                    asp-route-sortColumn="Address"
                    asp-route-sortOrder="desc"
+                   asp-route-q=@(Model.Q)
                    style="text-decoration:none">
                     <i class="fa-solid fa-arrow-down" style="color:black"></i>
                 </a>

@@ -2,54 +2,152 @@
 @model WebbApp.Pages.Accounts.OneAccountModel
 @{
     ViewData["Title"] = "Account Details";
+
+    <h1>Account Details</h1>
+
+    <div class="account-details">
+        <h2>Account Information</h2>
+        <p><strong>Account ID:</strong> @Model.Account.AccountId</p>
+        <p><strong>Frequency:</strong> @Model.Account.Frequency</p>
+        <p><strong>Created:</strong> @Model.Account.Created</p>
+        <p><strong>Balance:</strong> @Model.Account.Balance</p>
+    </div>
+
+    <div class="account-transactions">
+        <h2>Transactions</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transaction in Model.Transactions)
+                {
+                    string amountColor = @transaction.Amount > 0 ? "#2ecc71" : "#e74c3c";
+                    <tr>
+                        <td>@transaction.TransactionId</td>
+                        <td>@transaction.Date</td>
+                        <td style="color: @amountColor">@transaction.Amount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button id="showMoreButton" class="show-more-btn" type="submit" asp-for="PageNr" value="@Model.PageNr">Show More</button>
+        <button onclick="goBack()" class="go-back-btn" type="submit">Go Back</button>
+    </div>
 }
 
-<h1>Account Details</h1>
 
-<div>
-    <h2>Account Information</h2>
-    <p><strong>Account ID:</strong> @Model.Account.AccountId</p>
-    <p><strong>Frequency:</strong> @Model.Account.Frequency</p>
-    <p><strong>Created:</strong> @Model.Account.Created</p>
-    <p><strong>Balance:</strong> @Model.Account.Balance</p>
-</div>
+<style>
 
-<div>
-    <h2>Transactions</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Transaction ID</th>
-                <th>Date</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var transaction in Model.Transactions)
-            {
-                <tr>
-                    <td>@transaction.TransactionId</td>
-                    <td>@transaction.Date</td>
-                    <td>@transaction.Amount</td>
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
 
-                </tr>
+    .account-details {
+        margin-bottom: 30px;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .account-details h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .account-details p {
+            margin-bottom: 10px;
+            color: black;
+        }
+
+            .account-details p strong {
+                color: #555;
             }
-        </tbody>
-    </table>
 
-    <button id="showMoreButton" type="submit" asp-for=PageNr vale=PageNr++>Show More</button><button onclick="goBack()" type="submit">Go Back</button>
+    .account-transactions {
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-</div>
+        .account-transactions h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
+    .table {
+        margin: 0 auto;
+        width: 80%;
+        border-collapse: collapse;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-    <script>
-    var anka = 1;
-        document.getElementById("showMoreButton").addEventListener("click", function () {
-            var id = @Model.Account.AccountId;
-     
+        .table thead th {
+            padding: 10px;
+            background-color: rgba(36, 183, 164, 0.8);
+            color: #fff;
+            font-weight: bold;
+        }
 
-        var url = `/Accounts/OneAccount?handler=ShowMore&id=${id}&pageNr=${anka}`;
-        anka++;
+        .table td {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            color: #333;
+        }
+
+            .table td:first-child,
+            .table td:nth-child(2) {
+                text-align: center;
+            }
+
+    .show-more-btn,
+    .go-back-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .show-more-btn {
+        background-color: #24b7a4;
+        margin-right: 10px;
+    }
+
+    .go-back-btn {
+        background-color: #e74c3c;
+    }
+
+        .show-more-btn:hover,
+        .go-back-btn:hover {
+            background-color: #36d8c3;
+        }
+       
+</style>
+
+<script>
+    document.getElementById("showMoreButton").addEventListener("click", function () {
+        var id = @Model.Account.AccountId;
+        var pageNr = @Model.PageNr;
+
+        var url = `/Accounts/OneAccount?handler=ShowMore&id=${id}&pageNr=${pageNr + 1}`;
         fetch(url)
             .then(response => {
                 if (response.ok) {
@@ -65,14 +163,24 @@
                 // Iterate over the transactions array
                 transactions.forEach(transaction => {
                     var row = document.createElement("tr");
-                                row.innerHTML = `
-                                    <td>${transaction.transactionId}</td>
-                                    <td>${transaction.date}</td>
-                                    <td>${transaction.amount}</td>
+                    if(transaction.amount > 0)
+                    {
+                        row.innerHTML = `
+                                <td>${transaction.transactionId}</td>
+                                <td>${transaction.date}</td>
+                                      <td style="color: #2ecc71 !important;">${transaction.amount}</td>
 
-                                `;
-                                document.querySelector("tbody").appendChild(row);
-                    console.log(transaction);
+                            `;
+                    }
+                    else
+                    {
+                        row.innerHTML = `
+                                <td>${transaction.transactionId}</td>
+                                <td>${transaction.date}</td>
+                                        <td style="color: #2ecc71 !important;">${transaction.amount}</td>
+                            `;
+                    }
+                    document.querySelector("tbody").appendChild(row);
                 });
 
             })
@@ -80,6 +188,5 @@
                 // Handle any errors during the request or data processing
                 console.error(error);
             });
-        });
-    </script>
-    
+    });
+</script>

@@ -839,3 +839,7 @@ button[type=submit] {
     align-items: center;
 
 }
+
+.error-label {
+    color: orangered;
+}

@@ -1,0 +1,157 @@
+﻿@page
+@model WebbApp.Areas.Identity.Pages.Account.Manage.UpdateCustomerModel
+@{
+}
+<div class="contact center">
+    <div class="form-container">
+        <form class="php-email-form" method="post">
+            <h2 class="formbold-form-title">Register now</h2>
+
+            <div class="form-input-container">
+                <div>
+                    <label for="givenname" class="form-label">First name*</label>
+                    <input type="text" name="givenname" id="givenname" class="form-input" asp-for=@Model.CustomerVm.Givenname value="@Model.CustomerVm.Givenname" onkeyup=validateName(event) required />
+                    <label class="error-label"></label>
+                </div>
+                <div>
+                    <label for="City" class="form-label">City</label>
+                    <input type="text" name="City" id="City" class="form-input" asp-for=@Model.CustomerVm.City value="@Model.CustomerVm.City" onkeyup=validateName(event) required />
+                    <label class="error-label"></label>
+                </div>
+            </div>
+
+            <div class="form-input-container">
+                <div>
+                    <label for="surname" class="form-label">Surname</label>
+                    <input type="text" name="surname" id="surname" class="form-input" asp-for=@Model.CustomerVm.Surname value="@Model.CustomerVm.Surname" onkeyup=validateName(event) required />
+                    <label class="error-label"></label>
+                </div>
+                <div>
+                    <label for="telephonenumber" class="form-label">Phone number*</label>
+                    <input type="text" name="telephonenumber" id="telephonenumber" class="form-input" asp-for=@Model.CustomerVm.Telephonenumber value="@Model.CustomerVm.Telephonenumber" onkeyup=validateNumber(event) required />
+                    <label class="error-label"></label>
+                </div>
+            </div>
+
+            <div class="form-input-container">
+                <div>
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="country" id="country" class="form-input" asp-for=@Model.CustomerVm.Country value="@Model.CustomerVm.Country" onkeyup=validateName(event) required />
+                    <label class="error-label"></label>
+                </div>
+                <div>
+                    <label for="streetaddress" class="form-label">Streetaddress</label>
+                    <input type="text" name="streetaddress" id="streetaddress" class="form-input" asp-for=@Model.CustomerVm.Streetaddress value="@Model.CustomerVm.Streetaddress"/>
+                    <label class="error-label"></label>
+                </div>
+            </div>
+
+            <div class="form-input-container">
+                <div>
+                    <label for="gender" class="form-label">Gender</label>
+                    <input type="text" name="gender" id="gender" class="form-input" asp-for=@Model.CustomerVm.Gender value="@Model.CustomerVm.Gender" onkeyup=validateName(event) required />
+                    <label class="error-label"></label>
+                </div>
+                <div>
+                    <label for="zipcode" class="form-label">Zipcode</label>
+                    <input type="text" name="zipcode" id="zipcode" class="form-input" asp-for=@Model.CustomerVm.ZipCode value="@Model.CustomerVm.ZipCode" onkeyup=validateNumber(event) required />
+                    <label class="error-label"></label>
+                </div>
+            </div>
+
+            <div>
+                <label for="countrycode" class="form-label">Countrycode</label>
+                <input type="text" name="countrycode" id="countrycode" class="form-input" asp-for=@Model.CustomerVm.CountryCode value="@Model.CustomerVm.CountryCode"/>
+                <label class="error-label"></label>
+            </div>
+            <input type="hidden" name="customerid" id="customerid" class="form-input" asp-for=@Model.CustomerVm.CustomerId value="@Model.CustomerVm.CustomerId" />
+
+            <p class="formbold-policy">
+                By filling out this form and clicking submit, you acknowledge our
+                <a href="#">privacy policy.</a>
+            </p>
+            <button type="submit" class="form-submit">Submit Event Registration</button>
+        </form>
+    </div>
+</div>
+<style>
+    .form-container {
+        max-width: 550px;
+        width: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-label {
+        color: azure;
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 13px 22px;
+        border-radius: 5px;
+        border: 1px solid #dde3ec;
+        background: #ffffff;
+        font-weight: 500;
+        font-size: 16px;
+        color: #536387;
+        outline: none;
+        resize: none;
+    }
+
+        .form-input:focus {
+            border-color: #6a64f1;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+    .form-select {
+        width: 100%;
+        padding: 13px 22px;
+        border-radius: 5px;
+        border: 1px solid #dde3ec;
+        background: #ffffff;
+        font-weight: 500;
+        font-size: 16px;
+        color: #536387;
+        outline: none;
+    }
+
+        .form-select:focus {
+            border-color: #6a64f1;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+    .form-submit {
+        text-align: center;
+        width: 100%;
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 14px 25px;
+        border: none;
+        font-weight: 500;
+        background-color: #6a64f1;
+        color: white;
+        cursor: pointer;
+        margin-top: 25px;
+    }
+
+        .form-submit:hover {
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+    .form-input-container {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+        align-items: center;
+    }
+
+        .form-input-container > div {
+            flex-grow: 1;
+        }
+</style>

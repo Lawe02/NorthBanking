@@ -1,62 +1,218 @@
 ﻿@page
 @model WebbApp.Pages.Customers.OneCustomerModel
-@{
-    <div style="border: 1px solid #ccc; border-radius: 5px; background-color: transparent; padding: 10px; width: 1000px; margin: auto;">
-        <div style="overflow: hidden;">
-            <div style="float: right; width: 15%; text-align: left;">
-                <p>Name: @Model.CustomerVm.Givenname</p>
-                <p>Nationality: @Model.CustomerVm.Country</p>
-                <p>City: @Model.CustomerVm.City</p>
-                <p>Postal Code: @Model.CustomerVm.Zipcode</p>
-            </div> 
-            <div style="float: right; width: 35%; text-align: left;">
-                <p>Email: @Model.CustomerVm.Emailaddress</p>
-                <p>Address: @Model.CustomerVm.Streetaddress</p>
-                <p>National Id: @Model.CustomerVm.NationalId</p>
-                <p>Phonenumber: @Model.CustomerVm.Telephonenumber</p>
+
+<div class="customer-view">
+    <div class="customer-details">
+        <h2 class="section-title text-center">Personal Details</h2>
+        <div class="detail-section">
+            <div class="detail-item">
+                <span class="label">Name:</span>
+                <span class="value">@Model.CustomerVm.Givenname</span>
             </div>
-            <div style="text-align: center; width: 50%;">
-                <h2>@Model.CustomerVm.Givenname</h2>
-                <table style="margin: 0 auto;">
-                Accounts
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Balance</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var acc in @Model.Accounts)
-                        {
-                            <tr>
-                                <th>@acc.AccountId</th>
-                                <th>@acc.Balance</th>
-                                <th>
-                                    <a asp-page="/Accounts/OneAccount" asp-route-id=@acc.AccountId asp-route-cusId=@Model.CustomerVm.CustomerId><i class="fa-regular fa-square-info"></i></a>
-                                </th>
-                                <th>
-                                    <a asp-page="/Accounts/Deposit" asp-route-id=@acc.AccountId asp-route-cusId=@Model.CustomerVm.CustomerId><i class="fa-solid fa-square-plus"></i></a>
-                                </th>
-                                <th>
-                                    <a asp-page="/Accounts/Transfer" asp-route-id=@acc.AccountId asp-route-cusId=@Model.CustomerVm.CustomerId><i class="fa-solid fa-money-bill-transfer"></i></a>
-                                </th>
-                                <th>
-                                    <a asp-page="/Accounts/Withdrawal" asp-route-id=@acc.AccountId asp-route-cusId=@Model.CustomerVm.CustomerId><i class="fa-solid fa-square-minus"></i></a>
-                                </th>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                <p style="margin: 30px; cursor: pointer; background-color: transparent;"><b>Total Assets: @Model.TotalBalance kr</b></p>
+            <div class="detail-item">
+                <span class="label">Nationality:</span>
+                <span class="value">@Model.CustomerVm.Country</span>
             </div>
-            <button onclick="goBack()" type="submit">Go Back</button>
+        </div>
+        <div class="detail-section">
+            <div class="detail-item">
+                <span class="label">City:</span>
+                <span class="value">@Model.CustomerVm.City</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Postal Code:</span>
+                <span class="value">@Model.CustomerVm.CountryCode</span>
+            </div>
+        </div>
+        <div class="detail-section">
+            <div class="detail-item">
+                <span class="label">Email:</span>
+                <span class="value">@Model.CustomerVm.Givenname</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Address:</span>
+                <span class="value">@Model.CustomerVm.Streetaddress</span>
+            </div>
+        </div>
+        <div class="detail-section">
+            <div class="detail-item">
+                <span class="label">National Id:</span>
+                <span class="value">@Model.CustomerVm.NationalId</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Phonenumber:</span>
+                <span class="value">@Model.CustomerVm.Telephonenumber</span>
+            </div>
         </div>
     </div>
+    <div class="customer-accounts">
+        <h2>Accounts</h2>
+        <table class="accounts-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Balance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var acc in Model.Accounts)
+                {
+                    <tr>
+                        <td>@acc.AccountId</td>
+                        <td>@acc.Balance</td>
+                        <td class="actions">
+                            <a asp-page="/Accounts/OneAccount" asp-route-id="@acc.AccountId" asp-route-cusId="@Model.CustomerVm.CustomerId" class="action-link">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                            <a asp-page="/Accounts/Deposit" asp-route-id="@acc.AccountId" asp-route-cusId="@Model.CustomerVm.CustomerId" class="action-link">
+                                <i class="fas fa-plus-circle text-success"></i>
+                            </a>
+                            <a asp-page="/Accounts/Transfer" asp-route-id="@acc.AccountId" asp-route-cusId="@Model.CustomerVm.CustomerId" class="action-link">
+                                <i class="fas fa-exchange-alt text-warning"></i>
+                            </a>
+                            <a asp-page="/Accounts/Withdrawal" asp-route-id="@acc.AccountId" asp-route-cusId="@Model.CustomerVm.CustomerId" class="action-link">
+                                <i class="fas fa-minus-circle text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p class="total-assets">Total Assets: @Model.TotalBalance kr</p>
+    </div>
+    <button onclick="goBack()" class="go-back-btn" style="margin-top: 20px;">Go Back</button>
+</div>
+<style>
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
 
+    .customer-view {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        width: 1000px;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
+    .customer-details {
+        margin-bottom: 30px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-}
+        .customer-details h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    .detail-section {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .detail-item {
+        width: 45%;
+    }
+
+    .label {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .value {
+        color: #333;
+        font-weight: bold;
+    }
+
+    .customer-accounts {
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .customer-accounts h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    .accounts-table {
+        margin: 0 auto;
+        width: 80%;
+        border-collapse: collapse;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .accounts-table thead th {
+            padding: 10px;
+            background-color: rgba(36, 183, 164, 0.8);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .accounts-table td {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            color: #333;
+        }
+
+            .accounts-table td:first-child,
+            .accounts-table td:nth-child(2) {
+                text-align: center;
+            }
+
+        .accounts-table .actions {
+            display: flex;
+            justify-content: center;
+        }
+
+    .action-link {
+        margin: 0 5px;
+        color: #24b7a4;
+        font-size: 20px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .action-link:hover {
+            color: #36d8c3;
+        }
+
+    .total-assets {
+        margin: 30px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .go-back-btn {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #24b7a4;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .go-back-btn:hover {
+            background-color: #36d8c3;
+        }
+</style>

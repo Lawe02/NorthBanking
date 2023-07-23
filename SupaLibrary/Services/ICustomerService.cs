@@ -15,5 +15,7 @@ namespace SupaLibrary.Services
         public List<Account> GetCustomerAccounts(int id);
         public Customer GetCustomer(int id);
         public decimal TotalBalance(int id);
+        public void CreateCustomer(Customer customer);
+        public void UpdateCustomer(Customer customer);  
     }
 }

@@ -1,137 +1,47 @@
 ﻿@page
 @model WebbApp.Areas.Identity.Pages.Account.Manage.UpdateUserModel
 
-<h2>Update User</h2>
+<div class="contact center">
+    <div class="col-lg-5 mt-4 mt-lg-0 d-flex align-items-stretch">
 
-<form method="post" class="sexy-form">
-    <input type="hidden" name="id" value="@Model.User.Id" />
+        <form method="post" class="php-email-form" onsubmit="return validateForm()">
+            <input type="hidden" name="id" value="@Model.User.Id" />
 
-    <div class="form-group">
-        <label for="userName" class="sexy-label">User Name:</label>
-        <input type="text" id="userName" name="userName" class="form-control sexy-input" value="@Model.User.UserName" />
+            <div class="form-group col-lg-12 mt-5 mt-lg-0">
+                <label for="userName">User Name:</label>
+                <input type="text" id="userName" name="userName" class="form-control wide-input" value="@Model.User.UserName" onkeyup=validateName(event) required />
+                <label id="userNameError" class="error-label"></label>
+            </div>
+
+            <div class="form-group col-lg-12 mt-5 mt-lg-0">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" value="@Model.User.Email" onkeyup=validateEmail(event) required />
+                <label id="emailError" class="error-label"></label>
+            </div>
+
+            <div>
+                <label for="emailConfirmed">Confirmed:</label>
+                <div>
+                    <label>
+                        <input type="radio" id="emailConfirmed" name="emailConfirmed" value="true" @(Model.User.EmailConfirmed ? "checked" : "") />
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" id="emailNotConfirmed" name="emailConfirmed"  value="false" @(Model.User.EmailConfirmed ? "" : "checked") />
+                        No
+                    </label>
+                </div>
+                <label id="emailConfirmedError" class="error-label"></label>
+            </div>
+
+            <button type="submit" class="update-btn">Update</button>
+        </form>
     </div>
+</div>
 
-    <div class="form-group">
-        <label for="email" class="sexy-label">Email:</label>
-        <input type="email" id="email" name="email" class="form-control sexy-input" value="@Model.User.Email" />
-    </div>
-
-
-    <div class="form-group">
-        <label>Confirmed:</label>
-        <div class="radio-btns">
-            <label>
-                <input type="radio" name="emailConfirmed" value="true" @(Model.User.EmailConfirmed ? "checked" : "") />
-                <span class="radio-label">Yes</span>
-            </label>
-            <label>
-                <input type="radio" name="emailConfirmed" value="false" @(Model.User.EmailConfirmed ? "" : "checked") />
-                <span class="radio-label">No</span>
-            </label>
-        </div>
-    </div>
-
-    <button type="submit" class="update-btn sexy-button">Update</button>
-</form>
-
+<script>
+   
+</script>
 <style>
-    .sexy-form {
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
 
-    .sexy-input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-        transition: border-color 0.3s ease-in-out;
-    }
-
-        .sexy-input:focus {
-            border-color: #ff69b4;
-        }
-
-    .sexy-label {
-        display: inline-block;
-        margin-bottom: 5px;
-        font-size: 16px;
-        color: black;
-    }
-
-    .sexy-checkbox {
-        display: none;
-    }
-
-    .sexy-checkbox-group {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .sexy-checkbox-label {
-        position: relative;
-        padding-left: 30px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .sexy-checkbox-custom {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 20px;
-        width: 20px;
-        background-color: #f9f9f9;
-        border: 2px solid #ddd;
-        border-radius: 3px;
-    }
-
-    .sexy-checkbox:checked + .sexy-checkbox-label .sexy-checkbox-custom::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: 10px;
-        width: 10px;
-        background-color: #ff69b4;
-        border-radius: 2px;
-    }
-
-    .sexy-checkbox-label:hover .sexy-checkbox-custom {
-        border-color: #ff69b4;
-    }
-
-        .sexy-checkbox-label:hover .sexy-checkbox-custom::after {
-            background-color: #ff1493;
-        }
-
-    .sexy-button {
-        padding: 10px 20px;
-        background-color: #ff69b4;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
-    }
-
-        .sexy-button:hover {
-            background-color: #ff1493;
-        }
-
-    .radio-btns {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .radio-label {
-        margin-left: 5px;
-        color: black;
-    }
 </style>

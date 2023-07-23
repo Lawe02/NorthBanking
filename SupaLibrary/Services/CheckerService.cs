@@ -102,76 +102,7 @@ namespace SupaLibrary.Services
             return checkList;
 
 
-            //    var check = new List<CheckVM>();
-            //    var fraudulentTransactions = _context.Dispositions
-            //        .Include(x => x.Customer)
-            //        .Include(x => x.Account)
-            //        .Include(x => x.Account.Transactions)
-            //        .Where(x => x.Customer.CountryCode.ToLower() == country)
-            //        .Select(x => new
-            //        {
-            //            Name = x.Customer.Givenname,
-            //            AccountID = x.AccountId,
-            //            Transactions = x.Account.Transactions.OrderBy(t => t.Date).ToList()
-            //        })
-            //        .ToList()
-            //        .Select(x => new CheckVM
-            //        {
-            //            Name = x.Name,
-            //            AccountId = x.AccountID,
-            //            TransactionList = x.Transactions
-            //                .Where(t => t.Amount >= 15000 ||
-            //                            (t.Date.AddDays(3) >= DateTime.Now &&
-            //                             x.Transactions.Where(tx => tx.Date.AddDays(3) >= DateTime.Now)
-            //                                           .Sum(tx => tx.Amount) > 23000))
-            //                .Select(t => new TransactionVM
-            //                {
-            //                    Amount = t.Amount,
-            //                    Date = t.Date,
-            //                    Id = t.TransactionId,
-            //                    Reason = (t.Amount >= 15000) ? "Transaction over 15,000" : "Deposits under 72h period exceed"
-            //                })
-            //                .ToList()
-            //        })
-            //        .Where(x => x.TransactionList.Any())
-            //        .ToList();
-
-            //    foreach (var transaction in fraudulentTransactions)
-            //    {
-            //        Console.WriteLine(transaction.Name);
-            //        Console.WriteLine(transaction.AccountId);
-            //        foreach (var t in transaction.TransactionList)
-            //        {
-            //            Console.WriteLine($"Amount: {t.Amount} Reason: {t.Reason} Date: {t.Date}");
-            //        }
-            //    }
-            //}
-
-
-            // Switch to client-side evaluation
-            //.Select(x => new CheckVM()
-            //{
-            //    AccountId = x.AccountID,
-            //    Name = x.Name,
-            //    TransactionList = x.Transactions
-            //        .Where(tx => FindTimeExceed(x.AccountID, tx.TransactionId) || tx.Amount > 15000)
-            //        .Select(tx => new TransactionVM
-            //        {
-            //            Id = tx.TransactionId,
-            //            Amount = tx.Amount,
-            //            Date = tx.Date,
-            //            Reason = (tx.Amount > 15000) ? "Over 15,000" : "Deposits under 72h period exceed"
-            //        })
-            //        .ToList()
-            //})
-            //.ToList();
-
-
-            //foreach (var transaction in fraudulentTransactions)
-            //{
-            //    Console.WriteLine(transaction.Name);
-            //    foreach (var t in transaction.TransactionList)
-            //        Console.WriteLine($"Amount: {t.Amount} Reason: {t.Reason} Date: {t.Date}");
+         
         }
         public void WriteReport()
         {

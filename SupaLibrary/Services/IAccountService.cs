@@ -16,5 +16,6 @@ namespace SupaLibrary.Services
         public void MakeWithdrawal(decimal sum, Account acc);
         public void MakeTransfer(decimal sum, Account from, Account to);
         public List<Transaction> GetTransactions(int id, int page);
+        public void CreateAccount(Customer customer);
     }
 }

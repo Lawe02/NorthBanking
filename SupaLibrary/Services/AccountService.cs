@@ -17,7 +17,6 @@ namespace SupaLibrary.Services
         {
             _context = context;
         }
-
         public List<AccountViewModel> GetAccounts(string sortColumn, string sortOrder, int pageNr, string q)
         {
             var query = _context.Accounts
@@ -120,6 +119,23 @@ namespace SupaLibrary.Services
                                                    .Take(20)
                                                    .ToList();
             return transaction;
+        }
+        public void CreateAccount(Customer customer)
+        {
+            Account account = new();
+            account.Created = DateTime.Now;
+            account.Frequency = "AfterTransaction";
+
+            Disposition disposition = new();
+            disposition.Account = account;
+            disposition.AccountId = account.AccountId;
+            disposition.Customer = customer;
+            disposition.CustomerId = customer.CustomerId;
+            disposition.Type = "OWNER";
+
+            _context.Dispositions.Add(disposition);
+            _context.Accounts.Add(account);
+            _context.SaveChanges();
         }
     }
 }

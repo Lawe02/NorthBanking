@@ -1,0 +1,302 @@
+﻿@page
+@model WebbApp.Areas.Identity.Pages.Account.Manage.CustomerManagementModel
+@{
+    ViewData["Title"] = "Customer Management";
+}
+
+<h1>Customer Management</h1>
+
+<div style="display: flex; align-items: center;">
+    <div class="add-user-section">
+        <a asp-page="./AddCustomer">
+        <p class="add-user-btn">Add New User<i style="color:white;" class="fas fa-plus"></i></p>
+        </a>
+    </div>
+    <div class="search-container">
+        <form method="get" style="display: flex; align-items: center;">
+            <input asp-for="@Model.Q" id="searchInput" class="search-input" placeholder="Search..." />
+            <button type="submit" class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<table class="user-list">
+    <thead>
+        <tr>
+            <th class="header-cell">
+                Name
+                <a asp-page="./CustomerManagement"
+                   asp-route-sortColumn="Name"
+                   asp-route-sortOrder="asc"
+                   asp-route-q=@Model.Q>
+                    <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                </a>
+                <a asp-page="./CustomerManagement"
+                   asp-route-sortColumn="Name"
+                   asp-route-sortOrder="desc"
+                   asp-route-q=@Model.Q>
+                    <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                </a>
+            </th>
+            <th class="header-cell">
+                Nationality
+                <a asp-page="./CustomerManagement"
+                   asp-route-sortColumn="Country"
+                   asp-route-sortOrder="asc"
+                   asp-route-q=@Model.Q>
+                    <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                </a>
+                <a asp-page="./CustomerManagement"
+                   asp-route-sortColumn="Country"
+                   asp-route-sortOrder="desc"
+                   asp-route-q=@Model.Q>
+                    <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                </a>
+            </th>
+            <th class="header-cell">
+                Address
+                <a asp-page="./CustomerManagement"
+                   asp-route-sortColumn="Address"
+                   asp-route-sortOrder="asc"
+                   asp-route-q=@Model.Q>
+                    <i class="fa-solid fa-arrow-up" style="color:black"></i>
+                </a>
+                <a asp-page="./CustomerManagement"
+                   asp-route-sortColumn="Address"
+                   asp-route-sortOrder="desc"
+                   asp-route-q=@Model.Q>
+                    <i class="fa-solid fa-arrow-down" style="color:black"></i>
+                </a>
+            </th>
+            <th class="header-cell">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr class="user-item">
+                <td>@customer.Givenname</td>
+                <td>@customer.Country</td>
+                <td>@customer.Streetaddress</td>
+                <td class="user-actions">
+                    <a class="search-button" style="border-radius: 30px;" asp-page="./UpdateCustomer" asp-route-id="@customer.CustomerId">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="paging-section">
+    @if (Model.Customers.Count >= 1)
+    {
+        <a asp-page="./CustomerManagement"
+           asp-route-sortColumn=@(Model.SortColumn)
+           asp-route-sortOrder=@(Model.SortOrder)
+           asp-route-pageNr=@(Model.PageNr+1)
+           asp-route-q=@(Model.Q)
+               class="paging-btn">Next</a>
+    }
+    @if (Model.PageNr > 1)
+    {
+        <a asp-page="./CustomerManagement"
+           asp-route-sortColumn=@(Model.SortColumn)
+           asp-route-sortOrder=@(Model.SortOrder)
+           asp-route-pageNr=@(Model.PageNr-1)
+           asp-route-q=@(Model.Q)
+               class="paging-btn">Back</a>
+    }
+</div>
+
+    
+<style>
+    .user-list {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: rgba(232, 240, 247, 0.9);
+        color: #333;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden; /* Ensure the rounded corners are visible */
+    }
+
+    .header-cell {
+        padding: 16px;
+        background-color: #24b7a4;
+        color: #fff;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .user-list thead th:first-child {
+        border-top-left-radius: 8px;
+    }
+
+    .user-list thead th:last-child {
+        border-top-right-radius: 8px;
+    }
+
+    .user-item {
+        background-color: rgba(213, 225, 235, 0.9);
+    }
+
+        .user-item:nth-child(even) {
+            background-color: rgba(213, 225, 235, 0.7);
+        }
+
+        .user-item:hover {
+            background-color: rgba(213, 225, 235, 1);
+            transition: background-color 0.3s ease;
+        }
+
+        .user-item td {
+            padding: 16px;
+            border-bottom: 1px solid #ccc;
+        }
+
+    .user-actions {
+        display: flex;
+        align-items: center;
+    }
+
+        .user-actions button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-right: 8px;
+            color: #fff;
+            transition: 0.4s;
+        }
+
+        .user-actions .update-btn {
+            background-color: #24b7a4;
+        }
+
+        .user-actions .delete-btn {
+            background-color: #e74c3c;
+        }
+
+        .user-actions button:hover {
+            opacity: 0.8;
+        }
+
+    .add-user-btn {
+        background-color: #24b7a4;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-bottom: 16px;
+        transition: 0.4s;
+    }
+
+        .add-user-btn i {
+            margin-left: 8px; /* Adjust the spacing between the icon and text */
+        }
+
+        .add-user-btn:hover {
+            opacity: 0.8;
+        }
+
+    .add-user-section {
+        margin-right: 10px; /* Add space between the sections */
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        max-width: 300px; /* Adjust the maximum width of the search container */
+        background-color: #f5f5f5;
+        border-radius: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 16px;
+    }
+
+    .search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 8px 15px; /* Adjust the padding to make it smaller */
+        font-size: 14px; /* Adjust the font size */
+        color: #333;
+        background-color: transparent;
+    }
+
+    .search-button {
+        border: none;
+        background-color: #24b7a4;
+        color: #fff;
+        font-size: 16px;
+        padding: 8px 10px; /* Adjust the padding to make it smaller */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border-radius: 0 30px 30px 0; /* Adjust the border radius to match the search container */
+    }
+
+        .search-button:hover {
+            background-color: #36d8c3;
+        }
+
+    .add-user-btn {
+        background-color: #24b7a4;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.4s;
+    }
+
+        .add-user-btn i {
+            margin-left: 8px; /* Adjust the spacing between the icon and text */
+        }
+
+        .add-user-btn:hover {
+            opacity: 0.8;
+        }
+
+    .add-user-btn {
+        background-color: #24b7a4;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.4s;
+    }
+
+        .add-user-btn i {
+            margin-left: 8px; /* Adjust the spacing between the icon and text */
+        }
+
+        .add-user-btn:hover {
+            opacity: 0.8;
+        }
+
+    .paging-section {
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between; /* Distribute items evenly with maximum space between them */
+        align-items: center; /* Vertically center the items within the container */
+        flex-direction: row-reverse; /* Align items from right to left */
+    }
+
+    .paging-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-right: 8px;
+        color: #fff;
+        background-color: #24b7a4;
+        transition: 0.4s;
+    }
+
+        .paging-btn:hover {
+            opacity: 0.8;
+        }
+</style>

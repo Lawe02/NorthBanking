@@ -13,18 +13,28 @@ namespace SupaLibrary.Services
     public class CustomerService : ICustomerService
     {
         private readonly BankAppDataContext _dbContext;
-        public CustomerService(BankAppDataContext context)
+        private readonly IAccountService _accountService;
+        public CustomerService(BankAppDataContext context, IAccountService accService)
         {
             _dbContext = context;
+            _accountService = accService;
         }
         public List<CustomerViewModel> GetCustomers(string sortColumn, string sortOrder, string q, int pageNr)
         {
             var query = _dbContext.Customers
             .Select(x => new CustomerViewModel()
-            { 
+            {
                 Streetaddress = x.Streetaddress,
                 CustomerId = x.CustomerId,
-                Givenname = x.Givenname
+                Givenname = x.Givenname,
+                Country = x.Country,
+                Gender = x.Gender,
+                City = x.City,
+                CountryCode = x.CountryCode,
+                NationalId = x.NationalId,
+                Surname = x.Surname,
+                Telephonenumber = x.Telephonenumber,
+                ZipCode = x.Zipcode
             });
 
             if (sortColumn == "Address")
@@ -45,10 +55,17 @@ namespace SupaLibrary.Services
                 else
                     query = query.OrderByDescending(x => x.Givenname);
 
+            if (sortColumn == "Country")
+                if (sortOrder == "asc")
+                    query = query.OrderBy(x => x.Country);
+                else
+                    query = query.OrderByDescending(x => x.Country);
+
             if (q != null)
                 query = query.Where(x => x.Streetaddress.Contains(q)
                             || x.CustomerId.ToString().Contains(q)
-                            || x.Givenname.Contains(q));
+                            || x.Givenname.Contains(q)
+                            || x.Country.Contains(q));
 
             query = query.Skip((pageNr - 1) * 50)
                 .Take(50);
@@ -65,12 +82,12 @@ namespace SupaLibrary.Services
             var accounts = _dbContext.Dispositions.Include(x => x.Customer)
                                                      .Include(x => x.Account)
                                                      .Where(x => x.CustomerId == id)
-                                                     .Select(x => new Account 
+                                                     .Select(x => new Account
                                                      {
                                                          AccountId = x.Account.AccountId,
                                                          Frequency = x.Account.Frequency,
                                                          Balance = x.Account.Balance,
-                                                         Created = x.Account.Created, 
+                                                         Created = x.Account.Created,
                                                          Dispositions = x.Account.Dispositions, Loans = x.Account.Loans
                                                      })
                                                      .ToList();
@@ -84,6 +101,26 @@ namespace SupaLibrary.Services
                                   .Sum(x => x.Balance);
 
             return totalBalance;
+        }
+        public void CreateCustomer(Customer customer)
+        {
+            _dbContext.Customers.Add(customer);
+            _dbContext.SaveChanges();
+            _accountService.CreateAccount(customer);
+        }
+        public void UpdateCustomer(Customer customer)
+        {
+            var customerToUpdate = GetCustomer(customer.CustomerId);
+            customerToUpdate.Zipcode = customer.Zipcode;
+            customerToUpdate.Givenname = customer.Givenname;
+            customerToUpdate.Emailaddress = customer.Emailaddress;
+            customerToUpdate.Streetaddress = customer.Streetaddress;
+            customerToUpdate.Telephonenumber = customer.Telephonenumber;
+            customerToUpdate.Gender = customer.Gender;
+            customerToUpdate.CountryCode = customer.CountryCode;
+            customerToUpdate.NationalId = customer.NationalId;
+            customerToUpdate.City = customer.City;
+            _dbContext.SaveChanges();
         }
     }
 }
