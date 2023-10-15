@@ -12,6 +12,6 @@ namespace SupaLibrary.Services
         public List<IdentityUser> GetUsers();
         public IdentityUser GetUser(string username);
         public void DeleteUser(string id);
-        public void UpdateUser(IdentityUser user);
+        public void UpdateUser(IdentityUser user, bool role);
     }
 }

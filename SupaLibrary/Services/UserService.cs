@@ -14,9 +14,11 @@ namespace SupaLibrary.Services
     public class UserService : IUserService
     {
         private readonly ApplicationDbContext _context;
-        public UserService(ApplicationDbContext dbCOntext) 
+        private readonly UserManager<IdentityUser> _userManager;
+        public UserService(ApplicationDbContext dbCOntext, UserManager<IdentityUser> userManager) 
         {
             _context = dbCOntext;
+            _userManager = userManager;
         }    
         public List<IdentityUser> GetUsers()
         {
@@ -45,14 +47,23 @@ namespace SupaLibrary.Services
             _context.SaveChanges();
         }
 
-        public void UpdateUser(IdentityUser user)
+        public void UpdateUser(IdentityUser user, bool role)
         {
             var userToUpdate = _context.Users.FirstOrDefault(x => x.Id == user.Id);
 
             userToUpdate.UserName = user.UserName;
             userToUpdate.Email = user.Email;
             userToUpdate.EmailConfirmed = user.EmailConfirmed;
-
+            if (role)
+            {
+                _userManager.AddToRoleAsync(user, "Admin").Wait();
+                _userManager.RemoveFromRoleAsync(user, "Cashier").Wait();
+            }
+            else
+            {
+                _userManager.AddToRoleAsync(user, "Cashier").Wait();
+                _userManager.RemoveFromRoleAsync(user, "Admin").Wait();
+            }
             _context.SaveChanges();
         }
     }

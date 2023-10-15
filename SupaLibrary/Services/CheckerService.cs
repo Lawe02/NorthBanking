@@ -4,6 +4,7 @@ using SupaLibrary.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +20,14 @@ namespace SupaLibrary.Services
             _context = context;
         }
 
-        public string[] Countries { get; set; } = { "sv", "dk", "no", "fi" };
+        public string[] Countries { get; set; } = { "se", "dk", "no", "fi" };
+        public string FolderPath { get; set; }
         public List<CheckVM> CheckCountry(string country)
         {
-            List<CheckVM> checkList = new();
-            CheckVM vm = new();
-            List<TransactionVM> tVm = new();
+            var lastCheck = LastCheck();
             string query = @$"
                    DECLARE @CountryCode VARCHAR(2) = '{country}';
+                   DECLARE @LastCheckDate DATETIME = '{lastCheck}';
 
                    SELECT c.Givenname AS Name, a.AccountId, t.Amount, t.Date,
                        CASE
@@ -41,9 +42,11 @@ namespace SupaLibrary.Services
                    WHERE c.CountryCode = @CountryCode
                        AND (
                            (t.Amount >= 15000)
+                           AND (t.Date >= @LastCheckDate)
                            OR (
                                t.Date >= DATEADD(DAY, -3, GETDATE())
                                AND t.Amount > 0
+                               AND (t.Date >= @LastCheckDate)
                                AND a.AccountId IN (
                                    SELECT AccountId
                                    FROM Transactions
@@ -55,6 +58,10 @@ namespace SupaLibrary.Services
                        )
                         ORDER BY a.AccountId ASC;";
             string connectionString = "Server=localhost;Database=BankAppData;Trusted_Connection=True;MultipleActiveResultSets=true";
+
+            List<CheckVM> checkList = new();
+            CheckVM vm = new();
+            List<TransactionVM> tVm = new();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -71,7 +78,7 @@ namespace SupaLibrary.Services
                         int accountId = Convert.ToInt32(reader["AccountId"]);
                         decimal amount = Convert.ToDecimal(reader["Amount"]);
                         DateTime date = Convert.ToDateTime(reader["Date"]);
-                         string reason = reader["Reason"].ToString();
+                        string reason = reader["Reason"].ToString();
                         
 
                         if (accountId != currentId)
@@ -82,15 +89,10 @@ namespace SupaLibrary.Services
                             vm = new();
                             vm.Name = name;
                             vm.AccountId = accountId;
-                            //Console.WriteLine($"Name: {name} Account ID: {accountId}");
-                            //Console.WriteLine();
-                            //Console.WriteLine();
-                            //Console.WriteLine();
+
                             currentId = accountId;
                         }
                         tVm.Add(new TransactionVM() { Amount = amount, Date = date, Reason = reason });  
-                        //Console.WriteLine($"Amount: {amount} Date: {date} Reason: {reason}");
-                        //Console.WriteLine();
 
                     }
 
@@ -106,23 +108,59 @@ namespace SupaLibrary.Services
         }
         public void WriteReport()
         {
-            var norway = CheckCountry("no");
-            string docPath =
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            // Write the string array to a new file named "WriteLines.txt".
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "anka.txt")))
-            {
-                foreach (var line in norway)
+                foreach (string country in Countries)
                 {
-                    outputFile.WriteLine("AccountID : "+line.AccountId);
+                    var content = CheckCountry(country);
+                    var docPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "rapport.txt");
+                    using StreamWriter outputFile = new ((docPath), true);
+                        // Write the string array to a new file named "checklist.txt".
 
-                    foreach(var tran in line.TransactionList)
-                        outputFile.WriteLine("Amount : " + tran.Amount+"Reason :" + tran.Reason);
+                        foreach (var line in content)
+                        {
+                            outputFile.WriteLine("AccountID : " + line.AccountId + " Name : " + line.Name);
+
+                            foreach (var tran in line.TransactionList)
+                                outputFile.WriteLine("Amount : " + tran.Amount + " Reason : " + tran.Reason + " Date : " + tran.Date);
+                        }
+                    outputFile.WriteLine($"{country} checked, check done at {DateTime.Now}");
                 }
-                Console.WriteLine(docPath);    
+                    
 
+        }
+
+        public DateTime LastCheck()
+        {
+            var docPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "rapport.txt");
+
+            DateTime lastDateTime = new DateTime(2002, 02, 02);
+            DateTime tempDate = lastDateTime;
+
+            try
+            {
+                // Read all lines from the file
+                string[] lines = File.ReadAllLines(docPath);
+
+                // Loop through each line and find the last date-time entry
+                foreach (string line in lines)
+                {
+                    if (line.Contains("Date"))
+                    {
+                        tempDate = DateTime.Parse(line.Substring(line.Length - 19, 19));
+                        if (lastDateTime <= tempDate)
+                            lastDateTime = tempDate;
+
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading the file: {ex.Message}");
+            }
+
+            // If the last date time was found, parse it to a DateTime object
+            return lastDateTime;
+            
         }
     }
 }

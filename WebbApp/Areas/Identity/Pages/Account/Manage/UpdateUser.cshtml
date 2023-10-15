@@ -33,7 +33,20 @@
                 </div>
                 <label id="emailConfirmedError" class="error-label"></label>
             </div>
-
+            <div>
+                <label for="role">Role</label>
+                <div>
+                    <label>
+                        <input type="radio" id="role" name="role" value="false" @(Model.Role ? "checked" : "") />
+                        Admin
+                    </label>
+                    <label>
+                        <input type="radio" id="role" name="role" value="true" @(Model.Role? "" : "checked") />
+                        Cashier
+                    </label>
+                </div>
+                <label id="emailConfirmedError" class="error-label"></label>
+            </div>
             <button type="submit" class="update-btn">Update</button>
         </form>
     </div>

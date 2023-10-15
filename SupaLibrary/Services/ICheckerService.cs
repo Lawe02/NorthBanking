@@ -12,5 +12,7 @@ namespace SupaLibrary.Services
         public List<CheckVM> CheckCountry(string country);
         public void WriteReport();
         public string[] Countries { get; }
+        public string FolderPath  { get; }
+        public DateTime LastCheck();
     }
 }

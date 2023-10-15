@@ -7,8 +7,6 @@ using WebbApp.Models;
 
 namespace SupaLibrary.Services
 {
-    [Authorize(Roles = "Cashier")]
-
     public class AccountService : IAccountService
     {
         private readonly BankAppDataContext _context;

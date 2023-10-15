@@ -13,6 +13,7 @@ namespace WebbApp.Areas.Identity.Pages.Account.Manage
             _service = service;
         }
         public IdentityUser User { get; set; }
+        public bool Role { get; set; }
         public void OnGet(string id)
         {
             User = _service.GetUser(id); 
@@ -20,7 +21,7 @@ namespace WebbApp.Areas.Identity.Pages.Account.Manage
 
         public IActionResult Onpost(IdentityUser user)
         {
-            _service.UpdateUser(user);
+            _service.UpdateUser(user, Role);
             return RedirectToPage("./CrudMain");
         }
     }
