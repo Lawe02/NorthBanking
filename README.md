@@ -84,3 +84,29 @@ The transaction checker diligently saves potentially fraudulent transactions to 
 
 ```csharp
 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)/rapport.txt
+## License
+
+This project is licensed under the MIT License. Refer to the [LICENSE](link-to-license-file) file for detailed information.
+
+## Contributors
+
+- Your Name - Project Lead
+
+## Acknowledgments
+
+Special thanks to Your Acknowledgment for their contributions and support.
+
+## Production Link
+
+[**NorthBank Application**](https://northbank.azurewebsites.net/)
+
+**Admin Credentials:**
+
+- Username: `richard.chalk@systementor.se`
+- Password: `Hejsan123#`
+
+**Cashier Credentials:**
+
+- Username: `richard.chalk@cashier.systementor.se`
+- Password: `Hejsan123#`
+
