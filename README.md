@@ -31,7 +31,7 @@ Before getting started with NorthBankinApplication, ensure you have the required
 
     ```bash
     git clone <repository-url>
-    cd NorthBankinApplication
+    cd NorthBankingSystem
     ```
 
 2. **Configure Application Settings** ⚙️
@@ -98,7 +98,7 @@ Special thanks to Your Acknowledgment for their contributions and support.
 
 ## Production Link
 
-[**NorthBank Application**](https://northbank.azurewebsites.net/)
+[**NorthBank **](https://northbank.azurewebsites.net/)
 
 **Admin Credentials:**
 
