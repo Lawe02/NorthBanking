@@ -30,7 +30,7 @@ Before getting started with NorthBankinApplication, ensure you have the required
 1. **Clone the Repository** 🔗
 
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Lawe02/NorthBanking.git
     cd NorthBankingSystem
     ```
 
