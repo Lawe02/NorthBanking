@@ -90,11 +90,7 @@ This project is licensed under the MIT License. Refer to the [LICENSE](link-to-l
 
 ## Contributors
 
-- Your Name - Project Lead
-
-## Acknowledgments
-
-Special thanks to Your Acknowledgment for their contributions and support.
+- Lawe Zangena - Project Lead
 
 ## Production Link
 
