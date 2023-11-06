@@ -95,7 +95,7 @@ This project is licensed under the MIT License. Refer to the [LICENSE](link-to-l
 ## Production Link
 
 [**NorthBank **](https://northbank.azurewebsites.net/)
-[**BankApi **]((https://bankapi20231106112624.azurewebsites.net/swagger/index.html)  
+[**BankApi **](https://bankapi20231106112624.azurewebsites.net/swagger/index.html)  
 
 **Admin Credentials:(only bank)** 
 
