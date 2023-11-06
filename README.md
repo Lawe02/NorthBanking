@@ -95,13 +95,14 @@ This project is licensed under the MIT License. Refer to the [LICENSE](link-to-l
 ## Production Link
 
 [**NorthBank **](https://northbank.azurewebsites.net/)
+[**BankApi **]((https://bankapi20231106112624.azurewebsites.net/swagger/index.html)  
 
-**Admin Credentials:**
+**Admin Credentials:(only bank)** 
 
 - Username: `richard.chalk@systementor.se`
 - Password: `Hejsan123#`
 
-**Cashier Credentials:**
+**Cashier Credentials:(bank and api)**
 
 - Username: `richard.chalk@cashier.systementor.se`
 - Password: `Hejsan123#`
